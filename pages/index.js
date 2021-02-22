@@ -10,7 +10,7 @@ export default function Home({dataset}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="font-mono flex flex-col items-center justify-center flex-1 px-20">
+      <main className="prose max-w-none prose-red	font-mono flex flex-col items-center justify-center flex-1 px-20">
         <h1 className="text-6xl font-bold text-center">
           { descriptor.title }
         </h1>

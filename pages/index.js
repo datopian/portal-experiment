@@ -8,9 +8,11 @@ export default function Home({dataset}) {
       <Head>
         <title>Dataset</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet" />
       </Head>
 
-      <main className="prose max-w-none prose-red	font-mono flex flex-col items-center justify-center flex-1 px-20">
+      <main className="prose prose-red max-w-3xl font-mono flex flex-col items-center justify-center flex-1 px-20">
         <h1 className="text-6xl font-bold text-center">
           { descriptor.title }
         </h1>

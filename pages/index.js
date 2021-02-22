@@ -3,7 +3,6 @@ import path from 'path'
 
 export default function Home({dataset}) {
   const descriptor = dataset.descriptor
-  const readme = dataset.readme
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -23,7 +22,7 @@ export default function Home({dataset}) {
           ))}
         </section>
         <section>
-          {readme}
+          <div dangerouslySetInnerHTML={{ __html: dataset.readmeHtml }} />
         </section>
       </main>
     </div>
@@ -35,7 +34,7 @@ const datasetsDirectory = path.join(process.cwd(), 'datasets')
 import { getDataset } from '../lib/dataset'
 
 export async function getStaticProps() {
-  const dataset = getDataset(datasetsDirectory)
+  const dataset = await getDataset(datasetsDirectory)
   return {
     props: {
       dataset

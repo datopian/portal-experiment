@@ -12,7 +12,7 @@
   "resources": [
     {
       "name": "vix-daily",
-      "path": "data/vix-daily.csv",
+      "path": "vix-daily.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {

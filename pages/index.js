@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { getDataset } from '../lib/dataset'
 
 export default function Home({dataset}) {
-  console.log(dataset._resources)
   const descriptor = dataset._descriptor
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">

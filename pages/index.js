@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import { getDataset } from '../lib/dataset'
+import { useTable } from 'react-table'
 
 export default function Home({dataset}) {
+  console.log(dataset.data)
   const descriptor = dataset._descriptor
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -17,7 +19,7 @@ export default function Home({dataset}) {
           { descriptor.title }
         </h1>
        <section>
-          {dataset._resources.map((resource) => (
+          {dataset._resources.map(resource => (
             <section key={resource._descriptor.name}>
               file : {resource._descriptor.name}
             </section>
@@ -31,7 +33,7 @@ export default function Home({dataset}) {
         </section>
         <section>
           <h1>README</h1>
-          <div dangerouslySetInnerHTML={{ __html: dataset.readmeHtml }} />
+          <div dangerouslySetInnerHTML={{ __html: descriptor.readme }} />
         </section>
       </main>
     </div>

@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import path from 'path'
+import { getDataset } from '../lib/dataset'
 
 export default function Home({dataset}) {
-  const descriptor = dataset.descriptor
+  console.log(dataset._resources)
+  const descriptor = dataset._descriptor
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -17,9 +18,9 @@ export default function Home({dataset}) {
           { descriptor.title }
         </h1>
        <section>
-          {descriptor.resources.map((resource) => (
-            <section key={resource.name}>
-              {resource.name}
+          {dataset._resources.map((resource) => (
+            <section key={resource._descriptor.name}>
+              file : {resource._descriptor.name}
             </section>
           ))}
         </section>
@@ -38,12 +39,9 @@ export default function Home({dataset}) {
   )
 }
 
-const datasetsDirectory = path.join(process.cwd(), 'datasets')
-
-import { getDataset } from '../lib/dataset'
 
 export async function getStaticProps() {
-  const dataset = await getDataset(datasetsDirectory)
+  const dataset = await getDataset()
   return {
     props: {
       dataset

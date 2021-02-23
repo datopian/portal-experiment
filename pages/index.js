@@ -23,7 +23,14 @@ export default function Home({dataset}) {
             </section>
           ))}
         </section>
+        <section>key info</section>
+        <section>Files with a list of files</section>
+        <section>Graphs</section>
         <section>
+          Data table for first resource goes here (we only do first for now).
+        </section>
+        <section>
+          <h1>README</h1>
           <div dangerouslySetInnerHTML={{ __html: dataset.readmeHtml }} />
         </section>
       </main>

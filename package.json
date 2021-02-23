@@ -10,10 +10,13 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.4.0",
     "autoprefixer": "^10.0.4",
+    "frictionless.js": "^0.13.4",
+    "fs": "0.0.1-security",
     "next": "latest",
     "postcss": "^8.1.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-table": "^7.6.3",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
     "tailwindcss": "^2.0.2"

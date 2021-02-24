@@ -3,7 +3,6 @@ import { getDataset } from '../lib/dataset'
 import { useTable } from 'react-table'
 
 export default function Home({dataset}) {
-  console.log(dataset.data)
   const descriptor = dataset._descriptor
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -18,18 +17,21 @@ export default function Home({dataset}) {
         <h1 className="text-6xl font-bold text-center">
           { descriptor.title }
         </h1>
+        <section>key info</section>
+        <section>Files with a list of files</section>
        <section>
           {dataset._resources.map(resource => (
             <section key={resource._descriptor.name}>
-              file : {resource._descriptor.name}
+              <i>
+                {resource._descriptor.name}
+              </i>
             </section>
           ))}
         </section>
-        <section>key info</section>
-        <section>Files with a list of files</section>
         <section>Graphs</section>
         <section>
           Data table for first resource goes here (we only do first for now).
+
         </section>
         <section>
           <h1>README</h1>

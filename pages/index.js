@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { getDataset } from '../lib/dataset'
-import { useTable } from 'react-table'
+import Table from '../components/Table'
+import React from 'react'
+
 
 export default function Home({dataset}) {
   const descriptor = dataset._descriptor
@@ -31,7 +33,21 @@ export default function Home({dataset}) {
         <section>Graphs</section>
         <section>
           Data table for first resource goes here (we only do first for now).
-
+          {dataset._resources.map(resource => {
+           
+            const columns = React.useMemo(
+              ()=> [
+                {
+                  Header: resource._descriptor.name,
+                  columns: resource._descriptor.schema.fields.map(item => ({
+                    Header: item.name,
+                    accessor: item.name
+                  }))
+                } 
+              ])
+            const data = React.useMemo(()=> resource._data, [])
+            return (<Table  columns={columns} data={data}/>)
+          })}
         </section>
         <section>
           <h1>README</h1>

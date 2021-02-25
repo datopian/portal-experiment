@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .MuiTableCell-root {
   @apply font-mono
 }

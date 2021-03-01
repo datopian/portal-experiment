@@ -2,10 +2,13 @@ import path from 'path'
 import Head from 'next/head'
 import Table from '../components/Table'
 import filesize from 'filesize'
+import { Vega } from 'react-vega';
 import { getDataset } from '../lib/dataset'
-const datasetsDirectory = path.join(process.cwd(), 'datasets')
+import Chart from '../components/Chart'
+import addView from '../lib/utils'
+const datasetsDirectory = path.join(process.cwd(), 'fixtures', 'datasetsPlotlyView')
 
-export default function Home({ dataset }) {
+export default function Home({ dataset, specs, error }) {
   const descriptor = dataset.descriptor
   const resources = dataset.resources
 
@@ -30,7 +33,7 @@ export default function Home({ dataset }) {
           {descriptor.title}
         </h1>
         <h1 className="text-2xl font-bold mb-4">Key info</h1>
-        <div class="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-7 gap-4">
           <div>
             <h3 className="text-1xl font-bold mb-2">Files</h3>
           </div>
@@ -53,7 +56,7 @@ export default function Home({ dataset }) {
             <h3 className="text-1xl font-bold mb-2">Source</h3>
           </div>
         </div>
-        <div class="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-7 gap-4">
           <div>
             <h3 className="text-1xl">{resources.length}</h3>
           </div>
@@ -85,7 +88,7 @@ export default function Home({ dataset }) {
 
       <section className="m-8" name="file-list">
         <h1 className="text-2xl font-bold mb-4">Data Files</h1>
-        <div class="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-7 gap-4">
           <div>
             <h3 className="text-1xl font-bold mb-2">File</h3>
           </div>
@@ -103,9 +106,9 @@ export default function Home({ dataset }) {
           </div>
         </div>
 
-        {resources.map((resource) => {
+        {resources.map((resource, index) => {
           return (
-            <div class="grid grid-cols-7 gap-4">
+            <div key={`${index}_${resource.name}`} className="grid grid-cols-7 gap-4">
               <div>
                 <h3 className="text-1xl">{resource.name}</h3>
               </div>
@@ -132,6 +135,28 @@ export default function Home({ dataset }) {
 
       <section className="m-8" name="graph">
         <h1 className="text-2xl font-bold mb-4">Graph</h1>
+        {!specs || Object.keys(specs).length == 0 ? (<div>
+          <h1>No graph to display</h1>
+        </div>) :
+          (
+            Object.values(JSON.parse(specs)).map((spec, i) => {
+              if (spec.specType == "vega") {
+                return (
+                  <div key={`${i}_views`} className="ml-14">
+                    <Vega spec={spec} />
+                  </div>
+                )
+              } else if (["simple", "plotly"].includes(spec.specType)) {
+                return (
+                  <div key={`${i}_views`}>
+                    <Chart spec={spec} />
+                  </div>)
+              } else {
+                return <h1 key={`${i}_views`}>Cannot display view</h1>
+              }
+            })
+
+          )}
       </section>
 
       <section className="m-8" name="sample-table">
@@ -158,9 +183,7 @@ export default function Home({ dataset }) {
 
 export async function getStaticProps() {
   const dataset = await getDataset(datasetsDirectory)
-  return {
-    props: {
-      dataset
-    }
-  }
+  const datasetWithViews = addView(dataset)
+  // console.log("dataste", datasetWithViews);
+  return datasetWithViews
 }

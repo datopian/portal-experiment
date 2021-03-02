@@ -32,3 +32,4 @@ yarn-error.log*
 
 # vercel
 .vercel
+tests/pages/__snapshots__/index.test.js.snap

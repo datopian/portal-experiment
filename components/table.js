@@ -18,7 +18,7 @@ const Table = ({ schema, data }) => {
   })
   
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div data-testid="tableGrid" style={{ height: 400, width: '100%' }}>
       <DataGrid rows={data} columns={columns} pageSize={5} />
     </div>
   );

@@ -29,7 +29,7 @@ export default function Home({ dataset, specs, error }) {
 
 
       <section className="m-8" name="key-info">
-        <h1 name="title" className="text-3xl font-bold mb-8">
+        <h1 data-testid="datasetTitle" className="text-3xl font-bold mb-8">
           {descriptor.title}
         </h1>
         <h1 className="text-2xl font-bold mb-4">Key info</h1>
@@ -159,7 +159,7 @@ export default function Home({ dataset, specs, error }) {
           )}
       </section>
 
-      <section className="m-8" name="sample-table">
+      <section className="m-8" name="sample-table" >
         <h1 className="text-2xl font-bold mb-4">Data Preview</h1>
         <h2 className="text-1xl">{descriptor.title}</h2>
         {resources[0].sample ? (

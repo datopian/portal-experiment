@@ -1,5 +1,5 @@
 // import { shallow } from "enzyme";
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import path from 'path'
 import Home from '../../pages/index';
 import { getDataset } from "../../lib/dataset"
@@ -18,12 +18,22 @@ beforeAll(async () => {
 
 /** @test {Home Component} */
 describe('Home Component', () => {
-    it('should render without crashing', () => {
+    it('should render without crashing', async () => {
         const dataset = plotlyDatasetWithView.props.dataset
         const specs = plotlyDatasetWithView.props.specs
-        const { container, getAllByText} = render(<Home dataset={dataset} specs={specs} />)
-        expect(getAllByText('VIX - CBOE Volatility Index').length > 0).toEqual(true)
-        expect(container.querySelector('graph')).toMatchSnapshot()
+        const { findAllByText } = render(<Home dataset={dataset} specs={specs} />)
+        expect(await findAllByText('README'))
+
+    });
+    it('Sections are found in home page', async () => {
+        const dataset = plotlyDatasetWithView.props.dataset
+        const specs = plotlyDatasetWithView.props.specs
+        const { findByTestId, findAllByText } = render(<Home dataset={dataset} specs={specs} />)
+        expect(await findAllByText('Key info'))
+        expect(await findAllByText('Data Files'))
+        expect(await findAllByText('Graph'))
+        expect(await findAllByText('Data Preview'))
+        expect(await findByTestId('datasetTitle'))
 
     });
 });

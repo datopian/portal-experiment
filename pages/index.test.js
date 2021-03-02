@@ -1,8 +1,9 @@
+import React from 'react'
 import { render } from '@testing-library/react';
 import path from 'path'
-import Home from '../../pages/index';
-import { getDataset } from "../../lib/dataset"
-import { addView } from '../../lib/utils'
+import Home from './index';
+import { getDataset } from "../lib/dataset"
+import { addView } from '../lib/utils'
 
 
 let plotlyDatasetWithView

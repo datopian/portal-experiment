@@ -1,3 +1,4 @@
+import React from 'react'
 import {render } from '@testing-library/react';
 import path from 'path'
 import Chart from '../../components/Chart';

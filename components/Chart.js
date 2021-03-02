@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import createPlotlyComponent from "react-plotly.js/factory";
 
 let Plot;
@@ -18,11 +18,13 @@ const Chart = (props) => {
     }
 
     return (
-        <Plot {...props.spec}
-            layout={{ autosize: true }}
-            style={{ width: "100%", height: "100%" }}
-            useResizeHandler={true}
-        />
+        <div data-testid="plotlyChart">
+            <Plot {...props.spec}
+                layout={{ autosize: true }}
+                style={{ width: "100%", height: "100%" }}
+                useResizeHandler={true}
+            />
+        </div>
     )
 }
 

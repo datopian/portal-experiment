@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 /*
  * @param schema: Frictionless Table Schmea

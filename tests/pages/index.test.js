@@ -1,5 +1,5 @@
-// import { shallow } from "enzyme";
-import { act, render } from '@testing-library/react';
+import React from 'react'
+import { render } from '@testing-library/react';
 import path from 'path'
 import Home from '../../pages/index';
 import { getDataset } from "../../lib/dataset"

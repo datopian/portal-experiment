@@ -5,7 +5,7 @@ import filesize from 'filesize'
 import { Vega } from 'react-vega';
 import { getDataset } from '../lib/dataset'
 import Chart from '../components/Chart'
-import addView from '../lib/utils'
+import { addView } from '../lib/utils'
 const datasetsDirectory = path.join(process.cwd(), 'fixtures', 'datasetsPlotlyView')
 
 export default function Home({ dataset, specs, error }) {

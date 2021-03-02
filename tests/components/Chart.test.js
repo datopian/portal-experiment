@@ -1,5 +1,4 @@
-// import { shallow } from "enzyme";
-import { act, render } from '@testing-library/react';
+import {render } from '@testing-library/react';
 import path from 'path'
 import Chart from '../../components/Chart';
 import { getDataset } from "../../lib/dataset"
@@ -20,7 +19,7 @@ beforeAll(async () => {
 describe('Chart Component', () => {
     it('should render without crashing', async () => {
         const spec = JSON.parse(datasetWithView.props.specs)[0]
-        render(<Chart spec={spec} />)
-
+        const { findByTestId } = render(<Chart spec={spec} />)
+        expect(await findByTestId("plotlyChart"))
     });
 });

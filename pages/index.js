@@ -6,17 +6,38 @@ import { Vega } from 'react-vega';
 import { getDataset } from '../lib/dataset'
 import Chart from '../components/Chart'
 import { addView } from '../lib/utils'
-const datasetsDirectory = path.join(process.cwd(), 'fixtures', 'datasetsPlotlyView')
+const datasetsDirectory = process.env.PORTAL_DATASET_PATH
 
-export default function Home({ dataset, specs, error }) {
-  const descriptor = dataset.descriptor
-  const resources = dataset.resources
+export default function Home({ dataset, specs }) {
 
-  const datasetSize = resources.length == 1 ?
-    resources[0].size :
-    resources.reduce((accumulator, currentValue) => {
-      return accumulator.size + currentValue.size
-    })
+  if (!dataset && !specs) {
+    return (
+      <div className="container">
+        <Head>
+          <title>Dataset</title>
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet" />
+        </Head>
+        <h1 data-testid="datasetTitle" className="text-3xl font-bold mb-8">
+          No dataset found in path
+        </h1>
+      </div>
+    )
+  }
+
+  const descriptor = dataset['descriptor']
+  const resources = dataset['resources']
+  let datasetSize = 0
+
+  if (resources) {
+    datasetSize = resources.length == 1 ?
+      resources[0].size :
+      resources.reduce((accumulator, currentValue) => {
+        return accumulator.size + currentValue.size
+      })
+
+  }
 
   return (
     <div className="container">
@@ -182,8 +203,12 @@ export default function Home({ dataset, specs, error }) {
 
 
 export async function getStaticProps() {
+  if (!datasetsDirectory) {
+    return { props: {} }
+  }
+
   const dataset = await getDataset(datasetsDirectory)
   const datasetWithViews = addView(dataset)
-  // console.log("dataste", datasetWithViews);
   return datasetWithViews
+
 }
